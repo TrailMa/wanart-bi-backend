@@ -33,7 +33,7 @@ public class WebLogAspect {
         String uri = request.getRequestURI();
         Object[] args = joinPoint.getArgs();
         String params = "";
-        //logger.info("request url %s, method %s", url, method);
+        //logger.info("request url %s, method %s", uri, method);
         if(args.length > 0){
             if("POST".equals(method)){
                 // 约定 第一个参数为POST请求的body内容
