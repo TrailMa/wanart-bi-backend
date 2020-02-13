@@ -1,0 +1,1 @@
+alter table wanart_bi.user add column curProjectId int not null default 0;

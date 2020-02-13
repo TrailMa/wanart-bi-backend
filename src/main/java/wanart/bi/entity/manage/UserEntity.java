@@ -13,6 +13,7 @@ public class UserEntity {
     private String createdTime;
     private String lastLoginTime;
     private String password;
+    private int curProjectId;
 
     public int getId(){
         return id;
@@ -109,6 +110,14 @@ public class UserEntity {
     }
     public void setPassword(String password){
         this.password = password;
+    }
+
+    public int getCurProjectId() {
+        return curProjectId;
+    }
+
+    public void setCurProjectId(int curProjectId) {
+        this.curProjectId = curProjectId;
     }
 
     public UserEntity copy(){

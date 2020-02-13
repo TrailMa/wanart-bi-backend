@@ -19,7 +19,7 @@ public class UserDao {
 
     public UserEntity getUserByPassword(String name, String password){
         JdbcTemplate jdbcTemplate = getJdbcTemplate();
-        String sql = String.format("select id, `name`, `group`, projects, createdTime, lastLoginTime from `user` where `name`=\"%s\" and `password`=\"%s\"",
+        String sql = String.format("select id, `name`, `group`, projects, createdTime, lastLoginTime, curProjectId from `user` where `name`=\"%s\" and `password`=\"%s\"",
                 name, password);
         List<UserEntity> userEntityList = jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(UserEntity.class));
         if(userEntityList.size() == 0){

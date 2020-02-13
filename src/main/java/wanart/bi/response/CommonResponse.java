@@ -1,8 +1,10 @@
 package wanart.bi.response;
 
 import wanart.bi.common.ResponseResult;
+import wanart.bi.entity.manage.ProjectEntity;
 
 import javax.xml.ws.Response;
+import java.util.List;
 
 public class CommonResponse {
     private int result;
@@ -31,4 +33,5 @@ public class CommonResponse {
        result = ResponseResult.Failed;
        this.msg = msg;
     }
+
 }

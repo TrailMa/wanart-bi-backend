@@ -1,7 +1,8 @@
 package wanart.bi.service.login;
 
 import wanart.bi.response.CommonResponse;
+import wanart.bi.response.login.LoginResponse;
 
 public interface LoginService {
-    CommonResponse login(String name, String password);
+    LoginResponse login(String name, String password);
 }
