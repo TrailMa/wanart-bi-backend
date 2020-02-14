@@ -9,4 +9,5 @@ public interface ManageUserService {
     CommonResponse update(int userId, int targetUserId, int group);
     CommonResponse delete(int userId, int targetUserId);
     CommonResponse create(int userId, String name, String password, int group);
+    CommonResponse updateCurProjectId(int userId, int curProjectId);
 }

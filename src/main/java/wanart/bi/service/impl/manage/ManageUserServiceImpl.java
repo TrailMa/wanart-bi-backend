@@ -173,4 +173,17 @@ public class ManageUserServiceImpl implements ManageUserService {
         response.setSuccess();
         return response;
     }
+
+    public CommonResponse updateCurProjectId(int userId, int curProjectId){
+        CommonResponse response = new CommonResponse();
+        UserEntity userEntity = userDao.getUserById(userId);
+        if(userEntity == null) {
+            response.setResult(ResponseResult.Failed);
+            response.setMsg("user not eixst");
+            return response;
+        }
+        userDao.updateCurProjectId(userId, curProjectId);
+        response.setSuccess();
+        return  response;
+    }
 }

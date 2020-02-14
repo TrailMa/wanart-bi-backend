@@ -47,6 +47,5 @@ public class ManageProjectController {
     public CommonResponse create(@RequestParam("projectName") String projectName, @RequestParam("desc") String desc){
         return manageProjectService.createProject(1, projectName, desc);
     }
-
 }
 

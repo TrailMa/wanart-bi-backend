@@ -96,6 +96,12 @@ public class UserDao {
         jdbcTemplate.execute(sql);
     }
 
+    public void updateCurProjectId(int userId, int curProjectId){
+        JdbcTemplate jdbcTemplate = getJdbcTemplate();
+        String sql = String.format("update `user` set `curProjectId`=%s where `id`=%s", curProjectId, userId);
+        jdbcTemplate.execute(sql);
+    }
+
     private JdbcTemplate getJdbcTemplate(){
         return dataSourceRouterComponent.getJdbcTemplateByProjectName("manage");
     }

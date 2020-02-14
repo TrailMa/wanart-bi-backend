@@ -37,4 +37,10 @@ public class ManageUserController {
     public CommonResponse create(@RequestParam("userName") String userName, @RequestParam("password") String password, @RequestParam("group") int group){
         return manageUserService.create(1, userName, password, group);
     }
+
+
+    @GetMapping("/updateCurProjectId")
+    public CommonResponse updateCurProjectId(@RequestParam("curProjectId") int curProjectId){
+        return manageUserService.updateCurProjectId(1, curProjectId);
+    }
 }
