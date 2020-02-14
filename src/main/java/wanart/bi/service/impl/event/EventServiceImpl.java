@@ -60,18 +60,22 @@ public class EventServiceImpl implements EventService {
 
         ArrayList<String> timeSpan = SqlParamUtil.parseTimeSpan(request.getStartTime(), request.getEndTime());
         for(String timeSuffix: timeSpan){
-            String tableName = request.getEventName() + "_" + timeSuffix;
-            String separationStr = SqlParamUtil.parseSeparationTime(tableName, request.getSeparationTime(), eventColumnEntityList);
-            List<CommonDataEntity> tmpResult;
-            if(!groupStr.equals("")){
-                tmpResult = eventDao.getDataByGroup(request.getProject(), tableName, request.getDistinct(), conditionStr, separationStr, request.getGroup(), groupStr );
-            }else{
-                tmpResult = eventDao.getData(request.getProject(), tableName, request.getDistinct(), conditionStr, separationStr);
-            }
-            if(resultList == null){
-                resultList = tmpResult;
-            }else{
-                resultList.addAll(tmpResult);
+            try{
+                String tableName = request.getEventName() + "_" + timeSuffix;
+                String separationStr = SqlParamUtil.parseSeparationTime(tableName, request.getSeparationTime(), eventColumnEntityList);
+                List<CommonDataEntity> tmpResult;
+                if(!groupStr.equals("")){
+                    tmpResult = eventDao.getDataByGroup(request.getProject(), tableName, request.getDistinct(), conditionStr, separationStr, request.getGroup(), groupStr );
+                }else{
+                    tmpResult = eventDao.getData(request.getProject(), tableName, request.getDistinct(), conditionStr, separationStr);
+                }
+                if(resultList == null){
+                    resultList = tmpResult;
+                }else{
+                    resultList.addAll(tmpResult);
+                }
+            }catch (Exception e){
+
             }
         }
         response.setResult(ResponseResult.Success);
