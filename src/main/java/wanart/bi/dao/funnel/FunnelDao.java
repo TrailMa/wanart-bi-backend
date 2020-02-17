@@ -20,9 +20,16 @@ public class FunnelDao {
 
     // 筛选 符合漏斗条件的uid集合
     public List<Integer> getHeadFunnelUids(String projectName, String tableName, String condition){
-        JdbcTemplate jdbcTemplate = dataSourceRouterComponent.getJdbcTemplateByProjectName(projectName);
-        String sql = String.format("select distinct(uid) from %s %s", tableName, condition);
-        return jdbcTemplate.queryForList(sql, Integer.class);
+        List<Integer> result = null;
+        try{
+            JdbcTemplate jdbcTemplate = dataSourceRouterComponent.getJdbcTemplateByProjectName(projectName);
+            String sql = String.format("select distinct(uid) from %s %s", tableName, condition);
+            result = jdbcTemplate.queryForList(sql, Integer.class);
+        }catch (Exception e){
+            result = new ArrayList<>();
+        }finally {
+            return result;
+        }
     }
 
     public List<Integer> getTailFunnelUids(String projectName, String tableName, String condition, List<Integer> ids){
