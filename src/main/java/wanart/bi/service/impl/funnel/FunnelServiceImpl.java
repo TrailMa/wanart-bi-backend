@@ -82,6 +82,7 @@ public class FunnelServiceImpl implements FunnelService {
                 response.setCommonFailure("invalid distinct column");
                 return false;
             }
+            response.setSuccess();
             QueryConditionRequest inUidCondition = new QueryConditionRequest();
             inUidCondition.setColumnName(request.getDistinct());
             inUidCondition.setCombineType("none");
@@ -104,13 +105,12 @@ public class FunnelServiceImpl implements FunnelService {
         HashSet<Integer> resultHashSet = new HashSet<>(1024);
         for(String timeSuffix : timeSuffixList){
             String tableName = SqlParamUtil.getTableName(eventName, timeSuffix);
-            List<Integer> tmpResult = funnelDao.getTailFunnelUids(projectName, tableName, condition, preUidList);
-            /*
-            for(Integer uid : tmpResult){
-                resultHashSet.add(uid);
+            try {
+                List<Integer> tmpResult = funnelDao.getTailFunnelUids(projectName, tableName, condition, preUidList);
+                resultHashSet.addAll(tmpResult);
+            }catch (Exception e){
+
             }
-            */
-            resultHashSet.addAll(tmpResult);
         }
         return new ArrayList<>(resultHashSet);
     }
