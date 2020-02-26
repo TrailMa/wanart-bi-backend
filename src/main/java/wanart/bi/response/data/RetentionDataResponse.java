@@ -7,7 +7,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class RetentionDataResponse extends CommonResponse {
+    private int steps;
     private ArrayList<RetentionRowDataEntity> dataList;
+
+    public int getSteps() {
+        return steps;
+    }
+
+    public void setSteps(int steps) {
+        this.steps = steps;
+    }
 
     public List<RetentionRowDataEntity> getDataList(){
         return dataList;

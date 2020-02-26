@@ -101,13 +101,13 @@ public class SqlParamUtil {
 
 
     // 根据startTimeSuffix 计算step天的 tiemSuffix 2019_12_20 step=2 [2019_12_20, 2019_12_21]
-    public static ArrayList<String> calcTimeSuffix(String startTimeSuffix, int step){
+    public static ArrayList<String> calcTimeSuffix(String startTime, int step){
         ArrayList<String> timeList = new ArrayList<>();
         if(step < 1) {
             return  timeList;
         }
         DateTimeFormatter df = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-        LocalDateTime start = LocalDateTime.parse(startTimeSuffix, df);
+        LocalDateTime start = LocalDateTime.parse(startTime, df);
         for(int i=0; i<step; i++){
             LocalDateTime dayTime = start.plusDays(i);
             String timeSuffix = String.format("%s_%s_%s", dayTime.getYear(), dayTime.getMonthValue(), dayTime.getDayOfMonth());
@@ -138,7 +138,12 @@ public class SqlParamUtil {
         return String.format("%s_%s", eventName, timeSuffix);
     }
 
+    // 默认不需要添加列前缀(对于有join的sql，需要明确列前缀)
     public static String parseCondition(List<QueryConditionRequest> conditionList, List<EventColumnEntity> columnList){
+        return parseCondition(conditionList, columnList, "");
+    }
+
+    public static String parseCondition(List<QueryConditionRequest> conditionList, List<EventColumnEntity> columnList, String columnPrefix){
         String conditionStr = "";
         if(conditionList == null || conditionList.size() == 0){
             return conditionStr;
@@ -181,7 +186,7 @@ public class SqlParamUtil {
             }
 
             // 检查通过 拼接sql
-            conditionStr += QueryConditionUtil.toSqlString(condition.getColumnName(), condition.getOperatorEnum(), condition.getConditionParam());
+            conditionStr += QueryConditionUtil.toSqlString(columnPrefix + condition.getColumnName(), condition.getOperatorEnum(), condition.getConditionParam());
 
             // 连接后续条件
             if(i != conditionList.size() -1) {

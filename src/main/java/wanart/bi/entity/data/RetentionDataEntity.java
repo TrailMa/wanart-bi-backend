@@ -1,23 +1,23 @@
 package wanart.bi.entity.data;
 
 public class RetentionDataEntity {
-    private int createdCount;
-    private int loginCount;
+    private int firstCount;
+    private int secondCount;
     private int groupId;
     private String time;
 
-    public int getCreatedCount(){
-        return createdCount;
+    public int getFirstCount(){
+        return firstCount;
     }
-    public void setCreatedCount(int createdCount){
-        this.createdCount = createdCount;
+    public void setFirstCount(int firstCount){
+        this.firstCount = firstCount;
     }
 
-    public int getLoginCount(){
-        return loginCount;
+    public int getSecondCount(){
+        return secondCount;
     }
-    public void setLoginCount(int loginCount){
-        this.loginCount = loginCount;
+    public void setSecondCount(int secondCount){
+        this.secondCount = secondCount;
     }
 
     public int getGroupId(){

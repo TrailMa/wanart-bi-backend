@@ -22,7 +22,7 @@ public class RetentionDataDao {
         condition = SqlParamUtil.parseCondition(condition);
         condition = condition.replace("serverid", "a.serverid");
         condition = condition.replace("channel", "a.channel");
-        String sql = String.format("SELECT count(DISTINCT(a.%s)) as createdCount, count(DISTINCT(b.%s)) as loginCount, 0 as groupId, %s as time from %s as a left JOIN %s as b on a.%s = b.%s %s",
+        String sql = String.format("SELECT count(DISTINCT(a.%s)) as firstCount, count(DISTINCT(b.%s)) as secondCount, 0 as groupId, %s as time from %s as a left JOIN %s as b on a.%s = b.%s %s",
                 distinct, distinct, separationTime, createdTableName, loginTableName, distinct, distinct, condition);
         return jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(RetentionDataEntity.class));
     }
@@ -38,7 +38,7 @@ public class RetentionDataDao {
         group = group.replace("serverid", "a.serverid");
         group = group.replace("channel", "a.serverid");
 
-        String sql = String.format("SELECT count(DISTINCT(a.%s)) as createdCount, count(DISTINCT(b.%s)) as loginCount, %s as groupId, %s as time from %s as a left JOIN %s as b on a.%s = b.%s %s group by groupId",
+        String sql = String.format("SELECT count(DISTINCT(a.%s)) as firstCount, count(DISTINCT(b.%s)) as secondCount, %s as groupId, %s as time from %s as a left JOIN %s as b on a.%s = b.%s %s group by groupId",
                 distinct, distinct, group, separationTime, createdTableName, loginTableName, distinct, distinct, condition);
         return jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(RetentionDataEntity.class));
     }
