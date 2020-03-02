@@ -9,6 +9,7 @@ import wanart.bi.response.data.RetentionDataResponse;
 import wanart.bi.service.data.RetentionDataService;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpSession;
 
 @RestController
 public class RetentionDataController {
@@ -16,7 +17,7 @@ public class RetentionDataController {
     private RetentionDataService retentionDataService;
 
     @RequestMapping("/data/retention")
-    public RetentionDataResponse queryRetention(@RequestBody RetentionRequest retentionRequest) {
+    public RetentionDataResponse queryRetention(@RequestBody RetentionRequest retentionRequest, HttpSession session) {
         return retentionDataService.getData(retentionRequest);
     }
 }

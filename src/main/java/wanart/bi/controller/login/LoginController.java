@@ -7,6 +7,7 @@ import wanart.bi.response.CommonResponse;
 import wanart.bi.service.login.LoginService;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpSession;
 
 @RestController
 public class LoginController {
@@ -14,8 +15,8 @@ public class LoginController {
     private LoginService loginService;
 
     @PostMapping(value = "/login")
-    public CommonResponse login(@RequestParam("userName") String userName, @RequestParam("password") String password) {
-      return loginService.login(userName, password);
+    public CommonResponse login(@RequestParam("userName") String userName, @RequestParam("password") String password, HttpSession session) {
+      return loginService.login(userName, password, session);
     }
 
 }
