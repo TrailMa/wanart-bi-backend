@@ -4,6 +4,7 @@ import org.springframework.web.bind.annotation.*;
 import wanart.bi.response.CommonResponse;
 import wanart.bi.response.manage.QueryUserResponse;
 import wanart.bi.service.manage.ManageUserService;
+import wanart.bi.util.SessionUtil;
 
 import javax.annotation.Resource;
 
@@ -15,32 +16,37 @@ public class ManageUserController {
 
     @GetMapping("/query")
     public QueryUserResponse query(){
-        // todo 通过session 获取userId
-        return manageUserService.query(1);
+        int userId = SessionUtil.getUserId();
+        return manageUserService.query(userId);
     }
     @GetMapping("/queryByProject")
     public QueryUserResponse queryByProject(@RequestParam("projectId") int projectId){
-        return manageUserService.queryByProject(1, projectId);
+        int userId = SessionUtil.getUserId();
+        return manageUserService.queryByProject(userId, projectId);
     }
 
     @GetMapping("/update")
     public CommonResponse update(@RequestParam("targetUserId") int targetUserId, @RequestParam("group") int group){
-        return manageUserService.update(1, targetUserId, group);
+        int userId = SessionUtil.getUserId();
+        return manageUserService.update(userId, targetUserId, group);
     }
 
     @GetMapping("/delete")
     public CommonResponse delete(@RequestParam("targetUserId") int targetUserId){
-       return manageUserService.delete(2, targetUserId) ;
+        int userId = SessionUtil.getUserId();
+       return manageUserService.delete(userId, targetUserId) ;
     }
 
     @PostMapping("/create")
     public CommonResponse create(@RequestParam("userName") String userName, @RequestParam("password") String password, @RequestParam("group") int group){
-        return manageUserService.create(1, userName, password, group);
+        int userId = SessionUtil.getUserId();
+        return manageUserService.create(userId, userName, password, group);
     }
 
 
     @GetMapping("/updateCurProjectId")
     public CommonResponse updateCurProjectId(@RequestParam("curProjectId") int curProjectId){
-        return manageUserService.updateCurProjectId(1, curProjectId);
+        int userId = SessionUtil.getUserId();
+        return manageUserService.updateCurProjectId(userId, curProjectId);
     }
 }
